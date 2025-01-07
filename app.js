@@ -8,6 +8,6 @@ app.get('/',(req , res) => {
 })
 
 app.listen(port, () => {
-    console.log('spno in ascolto alla porta 3000');
+    console.log('sono in ascolto alla porta 3000');
     
 })
