@@ -25,7 +25,17 @@ const show = (req , res) => {
 }
 
 const store = (req , res) => {
-    res.send('aggiungo un nuovo post');
+    const id = posts.at(-1).id +1;
+    newPost ={
+        id,
+        ...req.body
+    }
+    posts.push(newPost);
+
+    res.status(201);
+    res.json(newPost);
+    console.log(posts);
+    
 }
 
 const update = (req , res) => {
