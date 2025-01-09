@@ -39,11 +39,42 @@ const store = (req , res) => {
 }
 
 const update = (req , res) => {
-    res.send("modifico il post con id"+ req.params.id);
+    const id = req.param.id;
+    const post = posts.find(post => post.id == id);
+    if(!post){
+        res.status(404);
+        return res.json({
+            message: 'post non trovato',
+            status: 404,
+            error: 'not found'
+        })        
+    }
+    for(let key in req.body){
+        post[key] = req.body[key];
+    }
+    res.json(post);
+    
 }
 
 const modify = (req , res) => {
-    res.send("modifica parziale del post con id" + req.params.id);
+    const id = req.param.id
+    const partecipante = partecipanti.find(partecipante => partecipante.id == id)
+   
+    if(!partecipante){
+        res.status(404)
+        return res.json({
+            message: 'partecipante non trovato',
+            status: 404,
+            error: 'not found'
+
+        })
+    }
+   
+    for(let key in req.body){
+        partecipante[key] = req.body[key];
+    }
+
+    res.json(partecipante);
 }
 
 const destroy = (req , res) => {
