@@ -1,10 +1,7 @@
-function notFoundEndpoint(req, res, next){
-    res.status(404);
-    res.json({
-        message: 'L\'endpoint richiesto non esiste',
+module.exports = (req, res, next) => {
+    res.status(404).json({
+        message: 'Endpoint non trovato',
         status: 404,
-        error: 'not found endpoint'
-    })
-}
-
-module.exports = notFoundEndpoint;
+        error: 'Not Found',
+    });
+};
