@@ -1,19 +1,19 @@
-const posts = require ('../data/posts');
+const posts = require('../data/posts');
 
-const index = (req , res) => {
+const index = (req, res) => {
     console.log(req.query);
 
     let filteredPost = posts;
-    if(req.query.tags){
-        filteredPost = post.filter(post => post.tags.includes(req.query.tags));
+    if (req.query.tags) {
+        filteredPosts = posts.filter(post => post.tags.includes(req.query.tags));
     }
-    
+
     res.json(filteredPosts);
 }
 
-const show = (req , res) => {
+const show = (req, res) => {
     const post = posts.find(post => post.id == req.params.id)
-    if(!post){
+    if (!post) {
         res.status(404);
         return res.json({
             message: 'post non trovato',
@@ -24,9 +24,9 @@ const show = (req , res) => {
     res.json(post);
 }
 
-const store = (req , res) => {
-    const id = posts.at(-1).id +1;
-    newPost ={
+const store = (req, res) => {
+    const id = posts.at(-1).id + 1;
+    newPost = {
         id,
         ...req.body
     }
@@ -35,32 +35,32 @@ const store = (req , res) => {
     res.status(201);
     res.json(newPost);
     console.log(posts);
-    
+
 }
 
-const update = (req , res) => {
-    const id = req.param.id;
+const update = (req, res) => {
+    const id = req.params.id;
     const post = posts.find(post => post.id == id);
-    if(!post){
+    if (!post) {
         res.status(404);
         return res.json({
             message: 'post non trovato',
             status: 404,
             error: 'not found'
-        })        
+        })
     }
-    for(let key in req.body){
+    for (let key in req.body) {
         post[key] = req.body[key];
     }
     res.json(post);
-    
+
 }
 
-const modify = (req , res) => {
-    const id = req.param.id
-    const partecipante = partecipanti.find(partecipante => partecipante.id == id)
-   
-    if(!partecipante){
+const modify = (req, res) => {
+    const id = req.params.id
+    const post = posts.find(post => post.id == id)
+
+    if (!post) {
         res.status(404)
         return res.json({
             message: 'partecipante non trovato',
@@ -69,17 +69,17 @@ const modify = (req , res) => {
 
         })
     }
-   
-    for(let key in req.body){
-        partecipante[key] = req.body[key];
+
+    for (let key in req.body) {
+        post[key] = req.body[key];
     }
 
-    res.json(partecipante);
+    res.json(post);
 }
 
-const destroy = (req , res) => {
+const destroy = (req, res) => {
     const post = posts.find(post => post.id == req.params.id)
-    if(!post){
+    if (!post) {
         res.status(404);
         return res.json({
             message: 'post non trovato',
@@ -89,13 +89,13 @@ const destroy = (req , res) => {
     }
     posts.splice(posts.indexOf(post), 1)
     console.log(posts);
-    
+
     res.sendStatus(204);
-    
-    
+
+
 }
 
-module.exports ={
+module.exports = {
     index,
     show,
     store,
