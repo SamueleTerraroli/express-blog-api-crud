@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-const port = 3000;
+const port = 3001;
 
 // Rotte
 app.get('/', (req, res) => {
@@ -20,5 +20,5 @@ app.use(notFoundEndpoint);
 app.use(errorsHandler);
 
 app.listen(port, () => {
-    console.log('sono in ascolto alla porta 3000');
+    console.log('sono in ascolto alla porta 3001');
 });
